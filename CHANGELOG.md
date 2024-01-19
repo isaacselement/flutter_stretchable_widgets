@@ -1,4 +1,4 @@
-# 0.0.3
+# 0.0.5
 
-* New Feature!!! StretchablePanelWidget is now available!
+* StretchablePanelWidget is now available, will add more widgets in the future.
 

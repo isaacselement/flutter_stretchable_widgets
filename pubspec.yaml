@@ -1,5 +1,5 @@
 name: flutter_stretchable_widgets
-description: Flutter widgets with stretchable capacity
+description: A lot of widgets that can be expanded or collapsed by calling the methods show() and hide().
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -15,7 +15,7 @@ description: Flutter widgets with stretchable capacity
 # This version is used _only_ for the Runner app, which is used if you just do
 # a `flutter run` or a `flutter make-host-app-editable`. It has no impact
 # on any other native host app that you embed your Flutter project into.
-version: 0.0.3
+version: 0.0.5
 homepage: https://github.com/isaacselement/flutter_stretchable_widgets
 
 environment:

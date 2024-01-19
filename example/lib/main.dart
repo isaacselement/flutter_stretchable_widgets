@@ -51,6 +51,8 @@ class HomeState extends State<Home> {
           child: getStretchableWidget(
             isInitShowStretchWidget: false,
             alignment: Alignment.centerRight,
+            isWrappedWithScrollView: true,
+            text: textShort,
           ),
         ),
 
@@ -73,20 +75,55 @@ class HomeState extends State<Home> {
           child: getStretchableWidget(
             isInitShowStretchWidget: false,
             alignment: Alignment.centerRight,
+            isWrappedWithScrollView: true,
+            text: textLong,
           ),
         ),
       ],
     );
   }
 
+  static const String textShort = ''
+      'Why is processing a sorted array faster than processing an unsorted array?'
+      '\n'
+      'Now for the sake of argument, suppose this is back in the 1800s - before long-distance or radio communication.'
+      '\n'
+      '';
+  static const String textLong = ''
+      '1、Client is an office worker around 30 years old'
+      '\n'
+      '2、I want a family car, about 200,000'
+      '\n'
+      '3、Urban TESLA assisted driving'
+      '\n'
+      '4、Faster car ~~'
+      '\n'
+      '5、I want to buy a car in 2 months, I want to buy a car in 2 months, I want to buy a car in 2 months'
+      '\n'
+      '6、If you guess wrong too often'
+      '\n'
+      '7、If you guess right every time'
+      '\n'
+      '8、If you guessed right, it continues on'
+      '\n'
+      '9、If you guessed wrong, the driver will stop'
+      '\n'
+      '10、Then it can restart down the other path'
+      '\n'
+      '10、In other words, you try to identify a pattern and follow it'
+      '\n'
+      '';
+
   Widget getStretchableWidget({
     bool isInitShowStretchWidget = false,
     AlignmentGeometry alignment = Alignment.centerRight,
+    bool isWrappedWithScrollView = false,
+    String text = textShort,
   }) {
     return StretchablePanelWidget(
-      isInitShowStretchWidget: isInitShowStretchWidget,
+      isShowStretchWidgetOnInit: isInitShowStretchWidget,
       widgetsBuilder: (context, state) {
-        if (state.showingTriggeredWidget) {
+        if (state.isShowingTriggeredWidget) {
           return Container(
             alignment: alignment,
             margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -112,6 +149,7 @@ class HomeState extends State<Home> {
             ),
           );
         } else {
+          ScrollController? scrollController;
           return Container(
             padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 10),
             child: Column(
@@ -121,7 +159,7 @@ class HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Flexible(
-                      flex: 4,
+                      flex: 6,
                       child: Text(
                         'Please take 5 minutes to introduce P7',
                         style: TextStyle(
@@ -145,37 +183,30 @@ class HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                const Text(
-                  '1、Client is an office worker around 30 years old'
-                  '\n'
-                  '2、I want a family car, about 200,000'
-                  '\n'
-                  '3、Urban TESLA assisted driving'
-                  '\n'
-                  '4、Faster car ~~'
-                  '\n'
-                  '5、I want to buy a car in 2 months, I want to buy a car in 2 months, I want to buy a car in 2 months'
-                  '\n'
-                  '6、I want to buy a car in 2 months'
-                  '\n'
-                  '7、I want to buy a car in 2 months'
-                  '\n',
-                  style: TextStyle(color: Colors.white, fontSize: 14),
-                ),
+                if (isWrappedWithScrollView)
+                  Container(
+                    constraints: const BoxConstraints(maxHeight: 200),
+                    child: SingleChildScrollView(
+                      child: Text(text, style: const TextStyle(fontSize: 14, color: Colors.white)),
+                    ),
+                  )
+                else
+                  Text(text, style: const TextStyle(color: Colors.white, fontSize: 14)),
               ],
             ),
           );
         }
       },
-      animatingBuilder: (context, child, w, h) {
+      decorateChildOnAnimating: (context, child, animation, animatingW, animatingH) {
         return Container(
           alignment: alignment,
           margin: const EdgeInsets.symmetric(horizontal: 16),
           child: Container(
-            width: w,
-            height: h,
+            width: animatingW,
+            height: animatingH,
             decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.7),
+              // color: Colors.black.withOpacity(animation.value),
               borderRadius: BorderRadius.circular(8),
             ),
             child: child,
