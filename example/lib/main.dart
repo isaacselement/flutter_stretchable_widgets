@@ -149,7 +149,6 @@ class HomeState extends State<Home> {
             ),
           );
         } else {
-          ScrollController? scrollController;
           return Container(
             padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 10),
             child: Column(

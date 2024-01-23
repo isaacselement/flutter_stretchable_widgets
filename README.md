@@ -11,8 +11,9 @@ Flutter widgets with stretchable capacity
 </div>
 
 ### Usage
+Please run `example/lib/main.dart` for more demonstrations
 
-    ````
+
     import 'package:flutter_stretchable_widgets/widget/stretchable_panel_view.dart';
 
     ...
@@ -46,7 +47,6 @@ Flutter widgets with stretchable capacity
         );
     }
     ...
-    ````
 
 
 ### Features and bugs
